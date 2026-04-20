@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Support-Woche | GBS St.Gallen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #c7d92e;
+      --green-dark: #b6ca1d;
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --bg: #f3efe7;
+      --text: #111111;
+      --muted: #5f5f5f;
+      --border: #d9d4ca;
+      --f: 'Source Sans 3', Arial, sans-serif;
+    }
+    body { font-family: var(--f); background: var(--bg); color: var(--text); line-height: 1.4; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(94%, 1100px); margin: 0 auto; }
+
+    /* HEADER */
+    .site-header { background: var(--black); color: var(--white); padding: 1rem 0; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .brand-name { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; }
+    .brand-name span { color: var(--green); }
+    .brand-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.15rem; }
+    .header-right { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); }
+
+    /* HERO */
+    .hero { background: var(--green); padding: 4rem 0 3rem; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 320px; gap: 2rem; align-items: start; }
+    .hero-kicker { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .hero h1 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.88; letter-spacing: -0.06em; font-weight: 700; margin-bottom: 1.25rem; }
+    .hero-sub { font-size: 1.15rem; font-weight: 700; max-width: 36ch; margin-bottom: 1.5rem; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 0.8rem 1.3rem; font-weight: 700; font-size: 0.95rem; border: 2px solid var(--black); transition: transform 0.15s; font-family: var(--f); cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-dark { background: var(--black); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--black); }
+
+    /* INFO CARD */
+    .info-card { background: var(--black); color: var(--white); padding: 1.5rem; }
+    .info-card h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.25rem; color: rgba(255,255,255,0.5); font-weight: 700; }
+    .meta-grid { display: grid; gap: 1rem; }
+    .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 0.3rem; }
+    .meta-val { font-size: 0.95rem; font-weight: 700; }
+
+    /* INFO BAND */
+    .info-band { display: grid; grid-template-columns: 1.4fr 1fr; }
+    .band-black { background: var(--black); color: var(--white); padding: 2rem; }
+    .band-green { background: var(--green-dark); color: var(--black); padding: 2rem; }
+    .band-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 1rem; opacity: 0.6; }
+    .band-list { list-style: none; display: grid; gap: 0.6rem; }
+    .band-list li { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+
+    /* SECTIONS */
+    .section { padding: 3.5rem 0; }
+    .section-alt { background: var(--white); }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .section-head h2 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 0.92; letter-spacing: -0.05em; font-weight: 700; }
+    .section-head p { color: var(--muted); font-weight: 700; max-width: 42ch; }
+
+    /* LOCATIONS */
+    .locations { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .loc-card { background: var(--white); border-top: 5px solid var(--black); padding: 1.1rem; }
+    .loc-num { display: inline-block; background: var(--green); font-size: 0.8rem; font-weight: 700; padding: 2px 8px; margin-bottom: 0.75rem; }
+    .loc-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.15; }
+    .loc-card p { font-size: 0.88rem; color: var(--muted); font-weight: 700; }
+
+    /* HOURS + STEPS */
+    .hs-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; align-items: start; }
+    .hours-card { background: var(--black); color: var(--white); padding: 2rem; }
+    .hours-card h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.5rem; }
+    .hours-card > p { font-size: 0.9rem; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 1.5rem; }
+    .hours-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hours-slot .meta-label { color: rgba(255,255,255,0.5); }
+    .hours-slot strong { font-size: 1.4rem; display: block; }
+    .ticket-panel { background: var(--bg); border: 2px solid var(--border); padding: 2rem; }
+    .ticket-panel h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.4rem; }
+    .ticket-panel > p { color: var(--muted); font-weight: 700; margin-bottom: 1.25rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .step-card { background: var(--white); border-top: 5px solid var(--black); padding: 1rem; }
+    .step-num { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; display: block; }
+    .step-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .step-card p { font-size: 0.86rem; color: var(--muted); font-weight: 700; }
+
+    /* Q&A */
+    .qa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .qa-card { background: var(--white); border: 1px solid var(--border); cursor: pointer; transition: border-color 0.15s; }
+    .qa-card:hover { border-color: #888; }
+    .qa-card.open { border-color: var(--black); border-top: 4px solid var(--green); }
+    .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 1.1rem; }
+    .qa-num { background: var(--green); font-size: 0.75rem; font-weight: 700; min-width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .qa-title { font-size: 1rem; font-weight: 700; flex: 1; line-height: 1.25; }
+    .qa-arrow { color: #bbb; font-size: 20px; line-height: 1; flex-shrink: 0; transition: transform 0.2s; margin-left: auto; }
+    .qa-card.open .qa-arrow { transform: rotate(90deg); color: var(--text); }
+    .qa-body { display: none; padding: 0 1.1rem 1.1rem 3rem; font-size: 0.9rem; color: var(--muted); line-height: 1.65; font-weight: 700; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+    .qa-card.open .qa-body { display: block; }
+    .qa-body code { background: #eee; border-radius: 2px; padding: 1px 5px; font-family: monospace; font-size: 0.85rem; color: var(--text); }
+    .qa-body strong { color: var(--text); }
+    .tip { display: inline-block; background: var(--green); font-size: 0.8rem; font-weight: 700; padding: 3px 10px; margin-top: 0.75rem; }
+
+    /* CONTACT */
+    .contact-strip { background: var(--black); color: var(--white); padding: 2rem 0; }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 0.4rem; }
+    .contact-val { font-size: 1.1rem; font-weight: 700; }
+
+    /* FOOTER */
+    .site-footer { background: var(--green); color: var(--black); padding: 1rem 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .footer-inner p { font-weight: 700; font-size: 0.9rem; }
+
+    @media (max-width: 820px) {
+      .hero-inner, .info-band, .hs-grid, .contact-grid { grid-template-columns: 1fr; }
+      .qa-grid, .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div>
+        <div class="brand-name">GBS <span>St.Gallen</span></div>
+        <div class="brand-sub">Gewerbliches Berufs- und Weiterbildungszentrum · Kanton St.Gallen</div>
+      </div>
+      <div class="header-right">IT Support-Woche</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-kicker">Informatik · GBS St.Gallen</div>
+          <h1>IT<br>Support-<br>Woche</h1>
+          <p class="hero-sub">PC-Probleme? Wir helfen dir direkt vor Ort.</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#ticket">Ticket erstellen</a>
+            <a class="btn btn-outline" href="#faq">Q&amp;A ansehen</a>
+          </div>
+        </div>
+        <aside class="info-card">
+          <h2>Infos auf einen Blick</h2>
+          <div class="meta-grid">
+            <div>
+              <div class="meta-label">Servicezeiten</div>
+              <div class="meta-val">09:00 – 12:00 Uhr</div>
+              <div class="meta-val">13:00 – 16:00 Uhr</div>
+            </div>
+            <div>
+              <div class="meta-label">Unterstützung bei</div>
+              <div class="meta-val" style="font-size:0.92rem;line-height:1.5;">WLAN · Login · Office · Drucker · Teams · NESA</div>
+            </div>
+            <div>
+              <div class="meta-label">Kontakt</div>
+              <div class="meta-val" style="font-size:0.92rem;">it-support@gbssg.ch</div>
+              <div class="meta-val" style="font-size:0.92rem;">+41 71 000 00 00</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="info-band">
+    <div class="band-black">
+      <div class="band-label">Womit wir helfen</div>
+      <ul class="band-list">
+        <li>WLAN &amp; Netzwerkprobleme</li>
+        <li>Login &amp; Passwort</li>
+        <li>Microsoft 365 &amp; Teams</li>
+        <li>NESA &amp; MyGBS</li>
+        <li>2FA einrichten</li>
+        <li>Computer &amp; Software</li>
+      </ul>
+    </div>
+    <div class="band-green">
+      <div class="band-label">Bring mit</div>
+      <ul class="band-list">
+        <li>Dein Gerät</li>
+        <li>Ladegerät</li>
+        <li>GBS-Login-Daten</li>
+        <li>Kurze Problembeschreibung</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Standorte</h2>
+        <p>Hier findest du das Support-Team während der Aktionswoche.</p>
+      </div>
+      <div class="locations">
+        <article class="loc-card">
+          <div class="loc-num">01</div>
+          <h3>Demutstrasse 115</h3>
+          <p>Allgemeine IT-Fragen und Gerätehilfe.</p>
+        </article>
+        <article class="loc-card">
+          <div class="loc-num">02</div>
+          <h3>Kirchgasse 15</h3>
+          <p>Login, Passwort, Schulzugänge und Microsoft 365.</p>
+        </article>
+        <article class="loc-card">
+          <div class="loc-num">03</div>
+          <h3>Grütlistrasse 1</h3>
+          <p>Netzwerk, WLAN und Lernplattformen.</p>
+        </article>
+        <article class="loc-card">
+          <div class="loc-num">04</div>
+          <h3>Davidstrasse 25</h3>
+          <p>Software-Installation und Updates.</p>
+        </article>
+        <article class="loc-card">
+          <div class="loc-num">05</div>
+          <h3>Kugelgasse 19</h3>
+          <p>Drucker, Peripherie und Gerätekonfiguration.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="hs-grid">
+        <div class="hours-card">
+          <h2>Servicezeiten</h2>
+          <p>Wir sind jeweils vormittags und nachmittags für dich da.</p>
+          <div class="hours-slots">
+            <div class="hours-slot">
+              <div class="meta-label" style="color:rgba(255,255,255,0.5)">Vormittag</div>
+              <strong>09:00 – 12:00</strong>
+            </div>
+            <div class="hours-slot">
+              <div class="meta-label" style="color:rgba(255,255,255,0.5)">Nachmittag</div>
+              <strong>13:00 – 16:00</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ticket-panel" id="ticket">
+          <h2>So funktioniert es</h2>
+          <p>Erstelle bei Bedarf zuerst ein Ticket oder komm direkt vorbei.</p>
+          <div class="steps-grid">
+            <article class="step-card">
+              <span class="step-num">Schritt 1</span>
+              <h3>Problem melden</h3>
+              <p>Beschreibe kurz dein Anliegen via Support-Formular.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-num">Schritt 2</span>
+              <h3>Vorbeikommen</h3>
+              <p>Besuche einen Standort in den Servicezeiten.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-num">Schritt 3</span>
+              <h3>Lösung erhalten</h3>
+              <p>Wir helfen dir direkt oder planen den nächsten Schritt.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Fragen &amp; Antworten</h2>
+        <p>Typische IT-Probleme und ihre Lösungen.</p>
+      </div>
+      <div class="qa-grid" id="qaGrid"></div>
+    </div>
+  </section>
+
+  <div class="contact-strip">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="contact-label">E-Mail</div>
+          <div class="contact-val">it-support@gbssg.ch</div>
+        </div>
+        <div>
+          <div class="contact-label">Telefon</div>
+          <div class="contact-val">+41 71 000 00 00</div>
+        </div>
+        <div>
+          <div class="contact-label">Ticket erstellen</div>
+          <div class="contact-val"><a href="#" style="color:var(--green)">support.gbssg.ch →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Gewerbliches Berufs- und Weiterbildungszentrum St.Gallen</p>
+      <p>IT Support-Woche</p>
+    </div>
+  </footer>
+
+  <script>
+    const qa = [
+      { num: 1, title: "Passwort ändern", body: `Auf der GBS-Anmeldeseite «<strong>Passwort vergessen</strong>» auswählen. Du benötigst dein Mobiltelefon, um die 2FA-Anfrage anzunehmen.<div class="tip">Mobiltelefon bereithalten</div>` },
+      { num: 2, title: "WLAN-Login", body: `Netzwerk <code>CL04Secure</code> wählen und mit den GBS-Login-Daten anmelden.<br><br><strong>Benutzername:</strong> <code>Vorname.Nachname@edu.gbssg.ch</code><br><strong>Passwort:</strong> Dein gewähltes Passwort` },
+      { num: 3, title: "2FA aufsetzen", body: `Microsoft Authenticator App auf dem Mobiltelefon installieren, QR-Code scannen und Verifizierungscode eingeben.<br><br>Verfügbar im <strong>App Store</strong> (iOS) und <strong>Google Play</strong> (Android).<div class="tip">Problem? → Ticket erstellen</div>` },
+      { num: 4, title: "MyGBS lädt nicht", body: `Die MyGBS-Website kann bei vielen gleichzeitigen Zugriffen langsam werden oder nicht laden. Dies liegt an der Serverlast – bitte etwas warten und es später erneut versuchen.` },
+      { num: 5, title: "NESA – Probleme beim Zugriff", body: `Mit dem normalen GBS-Login anmelden (<code>Vorname.Nachname@edu.gbssg.ch</code>).<br><br>Lädt die Website nur eine Datei herunter? Einfach ignorieren und Seite neu laden. Dies passiert bei hoher Serverlast.` },
+      { num: 6, title: "Konto gesperrt", body: `Das Konto wird nach zu vielen falschen Passworteingaben gesperrt. <strong>Einige Minuten warten</strong> – das Konto entsperrt sich automatisch.<div class="tip">Falls nicht: Ticket erstellen</div>` },
+      { num: 7, title: "Kein WLAN-Zugang", body: `Das schulinterne WLAN wird nicht angezeigt oder die Verbindung schlägt fehl:<br><br>1. WLAN aus- und wieder einschalten<br>2. Netzwerktreiber prüfen und aktualisieren<br>3. Schulnetzwerk manuell hinzufügen<br><br>Hilft nichts davon → Ticket erstellen.` },
+      { num: 8, title: "Microsoft Office startet nicht", body: `Kein Zugang zu Teams oder Moodle, weil das Konto noch nicht eingerichtet wurde:<br><br>– Lehrer oder IT-Support kontaktieren<br>– <strong>Spam-Ordner</strong> auf Einladungs-E-Mail prüfen<br>– IT-Support schaltet das Konto frei` },
+      { num: 9, title: "E-Mail-Konto nicht eingerichtet", body: `Keine Schul-E-Mail erhalten oder Login funktioniert nicht:<br><br>Das Konto wird beim IT-Support beantragt, Zugangsdaten neu zugestellt. Nach der ersten Anmeldung das Standardpasswort unbedingt ändern.` },
+      { num: 10, title: "Computer startet sehr langsam", body: `Wenn der Schulcomputer sehr lange zum Hochfahren braucht:<br><br>1. Nicht benötigte Programme aus dem <strong>Autostart</strong> (Task-Manager) entfernen<br>2. Gerät auf Viren oder Schadsoftware prüfen<br>3. Bei anhaltenden Problemen → IT-Support informiert, Gerät wird gewartet oder neu aufgesetzt` }
+    ];
+
+    const grid = document.getElementById('qaGrid');
+    qa.forEach(item => {
+      const card = document.createElement('article');
+      card.className = 'qa-card';
+      card.innerHTML = `
+        <div class="qa-header">
+          <div class="qa-num">${item.num}</div>
+          <div class="qa-title">${item.title}</div>
+          <div class="qa-arrow">›</div>
+        </div>
+        <div class="qa-body">${item.body}</div>
+      `;
+      card.querySelector('.qa-header').addEventListener('click', () => {
+        const open = card.classList.contains('open');
+        document.querySelectorAll('.qa-card').forEach(c => c.classList.remove('open'));
+        if (!open) card.classList.add('open');
+      });
+      grid.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
